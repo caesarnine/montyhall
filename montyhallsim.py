@@ -1,39 +1,25 @@
-# -*- coding: utf-8 -*-
-# <nbformat>3.0</nbformat>
-
-# <codecell>
-
+# let's import the libraries we need
 import numpy as np
 import random
 
-# <headingcell level=2>
-
-# First, a function to simulate the door the prize is hidden behind. 
-
-# <codecell>
+# first, the function to simulate the door that the prize is behind
+# each element is a different game, with the first representing the first game, the second the second, and so on
 
 def simulate_prizedoor(nsim):
     answer=np.random.randint(0,3,nsim)
     return answer
 
-print simulate_prizedoor(3)
 
-# <headingcell level=2>
-
-# Next, a function to simulate the guesses of a participant. In this case, we assume they are just random.
-
-# <codecell>
+# next, the function to simulate the users guesses
+# each element is a different game, with the first representing the first game, the second the second, and so on
 
 def simulate_guess(nsim):
     answer = np.random.randint(0,3,nsim)
     return answer
 print simulate_guess(3)
 
-# <headingcell level=2>
-
-# And then, a function to simulate the goat doors; which is a door that the prize isn't behind. 
-
-# <codecell>
+# and then, a function to simulate the goat doors; which are doors that the prize is not behind
+# each element is a different game, with the first representing the first game, the second the second, and so on
 
 def goat_door(prizedoors, guesses):
     result = np.empty(0)
@@ -47,11 +33,8 @@ def goat_door(prizedoors, guesses):
 
 print goat_door(np.array([0, 1, 2]), np.array([1,1,1]))
 
-# <headingcell level=2>
-
-# Continuing, a function to simulate if the participant changes his/her guess based on the opened goat door.
-
-# <codecell>
+# continuing, a function to simulate if the participant changes his/her guess based on the opened goat door
+# each element is a different game, with the first representing the first game, the second the second, and so on
 
 def switch_guess(guesses, goatdoors):
     result = np.empty(0)
@@ -62,13 +45,7 @@ def switch_guess(guesses, goatdoors):
         result = np.append(result,answer)
     return result.astype(int)
 
-print switch_guess(np.array([0,1,2]),np.array([1,0,1]))
-
-# <headingcell level=2>
-
-# Last, a function to calculate the winning percentage over multiple simulations.
-
-# <codecell>
+# last, a function to calculate the winning percentage over multiple simulations.
 
 def win_percentage(guesses, prizedoors):
     wins = float()
@@ -77,13 +54,7 @@ def win_percentage(guesses, prizedoors):
             wins += 1
     return wins/len(guesses) * 100
 
-print win_percentage(np.array([0,1,2]), np.array([0,0,0]))
-
-# <headingcell level=2>
-
-# Finally, let's pull it all together, and run 30,000 simulations to see whether it's better to switch doors or not.
-
-# <codecell>
+# finally, let's pull it all together, and run 30,000 simulations to see whether it's better to switch doors or not.
 
 guesses = simulate_guess(30000)
 prizedoors = simulate_prizedoor(30000)
